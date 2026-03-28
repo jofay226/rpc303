@@ -10,7 +10,18 @@ export const prisma = {
     findMany: async () => {
         return users
     } ,
-    // findUnique: ,
+    findUnique: async (userId: string) => {
+        return users.find((u) => u.id === userId )
+    },
+    create: async (user: {name: string, email: string}) => {
+        const newUser = {
+            id: `${users.length + 1}`, 
+            name: user.name, 
+            email: user.email 
+        }
+        users.push(newUser)
+        return newUser
+    }
     // create: ,
     // update: ,
     // delete: ,

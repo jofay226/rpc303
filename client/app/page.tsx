@@ -3,7 +3,16 @@ import { trpc } from "@/trpc/trpcProvider";
 
 export default function Home() {
   const res = trpc.listAllUsers.useQuery();
-  console.log(res?.data);
+  const res2 = trpc.listUser.useQuery({ id: "1" });
+  const createUser = trpc.createUser.useMutation();
 
-  return <>fdskjnfndsjkfsnj</>;
+  const createUserHandler = () => {
+    createUser.mutate({ name: "steve", email: "steve@gmail.com" });
+  };
+
+  return (
+    <>
+      <button onClick={createUserHandler}>create user</button>
+    </>
+  );
 }
